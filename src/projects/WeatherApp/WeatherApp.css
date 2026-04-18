@@ -1,0 +1,125 @@
+.weather-app {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.weather-app h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-form input:focus {
+  border-color: #e67e22;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  background: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-form button:hover {
+  background: #d35400;
+}
+
+.weather-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  color: white;
+}
+
+.weather-card .city-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.weather-card .country {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.weather-card .temperature {
+  font-size: 64px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.weather-card .description {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 16px;
+}
+
+.weather-details .detail {
+  text-align: center;
+}
+
+.weather-details .detail-value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.weather-details .detail-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 18px;
+}
+
+.error-message {
+  text-align: center;
+  padding: 20px;
+  color: #e74c3c;
+  background: #ffeaea;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.initial-message {
+  text-align: center;
+  color: #aaa;
+  padding: 40px 20px;
+  font-style: italic;
+}
