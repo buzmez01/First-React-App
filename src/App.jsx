@@ -1,120 +1,121 @@
+// useState = React'in "state" yönetim aracı
+// WinForms'ta bir değişkeni değiştirdiğinde ekranı manuel güncellersin (label1.Text = "...")
+// React'te useState kullanırsın: değer değişince ekran OTOMATİK güncellenir
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // ---------- STATE (Durum Değişkenleri) ----------
+  // WinForms'ta: private List<TodoItem> todos = new List<TodoItem>();
+  // React'te:    const [todos, setTodos] = useState([])
+  //
+  // todos     = mevcut değer (okumak için)
+  // setTodos  = değeri değiştiren fonksiyon (yazmak için)
+  // useState([]) = başlangıç değeri boş dizi
+  const [todos, setTodos] = useState([])
 
+  // Input kutusundaki yazı için ayrı bir state
+  // WinForms'ta: textBox1.Text
+  // React'te:    inputValue state'i
+  const [inputValue, setInputValue] = useState('')
+
+  // ---------- EVENT HANDLERS (Olay İşleyicileri) ----------
+  // WinForms'ta: private void btnEkle_Click(object sender, EventArgs e)
+  // React'te:    function handleAddTodo()
+  function handleAddTodo() {
+    // Boş input kontrolü
+    if (inputValue.trim() === '') return
+
+    // Yeni todo objesi oluştur
+    const newTodo = {
+      id: Date.now(),           // benzersiz ID (WinForms'taki gibi)
+      text: inputValue.trim(),  // todo metni
+      completed: false          // tamamlandı mı?
+    }
+
+    // State'i güncelle — ESKİ diziyi değiştirmiyoruz, YENİ dizi oluşturuyoruz
+    // WinForms'ta: todos.Add(newTodo) → listeyi doğrudan değiştirirsin
+    // React'te:    setTodos([...todos, newTodo]) → yeni dizi oluşturup set edersin
+    // "...todos" = spread operator, mevcut elemanları yeni diziye kopyalar
+    setTodos([...todos, newTodo])
+
+    // Input'u temizle
+    setInputValue('')
+  }
+
+  // Todo'yu tamamlandı/tamamlanmadı olarak işaretle
+  function handleToggleTodo(id) {
+    // Her todo'yu kontrol et, ID eşleşirse completed'ı tersine çevir
+    setTodos(todos.map(todo =>
+      todo.id === id
+        ? { ...todo, completed: !todo.completed }  // bu todo'yu güncelle
+        : todo                                       // diğerlerini olduğu gibi bırak
+    ))
+  }
+
+  // Todo sil
+  function handleDeleteTodo(id) {
+    // filter = ID eşleşMEYENleri tut (yani eşleşeni sil)
+    // WinForms'ta: todos.RemoveAll(t => t.Id == id)
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  // Form submit olduğunda (Enter tuşu veya buton tıklama)
+  function handleSubmit(e) {
+    e.preventDefault()  // Sayfanın yenilenmesini engelle
+    handleAddTodo()
+  }
+
+  // ---------- JSX (Ekran Çıktısı) ----------
+  // WinForms'ta Designer'da kontrolleri sürüklersin
+  // React'te JSX ile "ne görünsün" tanımlarsın
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app">
+      <h1>Todo App</h1>
 
-      <div className="ticks"></div>
+      {/* Form — WinForms'taki Panel + TextBox + Button gibi düşün */}
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Yeni görev ekle..."
+          value={inputValue}                              // Input'un değeri state'ten gelir
+          onChange={(e) => setInputValue(e.target.value)}  // Her tuş basımında state güncellenir
+        />
+        <button type="submit">Ekle</button>
+      </form>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
+      {/* Todo Listesi */}
+      {todos.length === 0 ? (
+        // Liste boşsa mesaj göster
+        <p className="empty-message">Henüz görev yok. Yukarıdan ekleyin!</p>
+      ) : (
+        // Liste doluysa todo'ları göster
+        // .map() = WinForms'taki foreach gibi, her eleman için bir JSX döndürür
+        <ul className="todo-list">
+          {todos.map(todo => (
+            // key = React'in her elemanı takip etmesi için gerekli benzersiz değer
+            // className = CSS class'ı (completed ise ek class ekle)
+            <li
+              key={todo.id}
+              className={`todo-item ${todo.completed ? 'completed' : ''}`}
+            >
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => handleToggleTodo(todo.id)}
+              />
+              <span>{todo.text}</span>
+              <button
+                className="delete-btn"
+                onClick={() => handleDeleteTodo(todo.id)}
+              >
+                Sil
+              </button>
             </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          ))}
+        </ul>
+      )}
+    </div>
   )
 }
 
