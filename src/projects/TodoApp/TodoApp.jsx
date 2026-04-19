@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './TodoApp.css'
 
-// Bu artık bağımsız bir component
-// WinForms'ta ayrı bir UserControl gibi düşün
-// Dışarıdan App.jsx içinde <TodoApp /> olarak çağrılacak
+// This is now a standalone component
+// Think of it like a separate UserControl in WinForms
+// It will be used inside App.jsx as <TodoApp />
 function TodoApp() {
   const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -45,15 +45,15 @@ function TodoApp() {
       <form className="todo-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Yeni görev ekle..."
+          placeholder="Add a new task..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <button type="submit">Ekle</button>
+        <button type="submit">Add</button>
       </form>
 
       {todos.length === 0 ? (
-        <p className="empty-message">Henüz görev yok. Yukarıdan ekleyin!</p>
+        <p className="empty-message">No tasks yet. Add one above!</p>
       ) : (
         <ul className="todo-list">
           {todos.map(todo => (
@@ -71,7 +71,7 @@ function TodoApp() {
                 className="delete-btn"
                 onClick={() => handleDeleteTodo(todo.id)}
               >
-                Sil
+                Delete
               </button>
             </li>
           ))}

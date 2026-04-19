@@ -1,19 +1,20 @@
 import { useState } from 'react'
 
-// Component'leri import ediyoruz
-// WinForms'ta: bir Form içinde UserControl eklemek gibi
+// Importing components
+// WinForms equivalent: adding UserControls inside a Form
 import TodoApp from './projects/TodoApp/TodoApp'
 import WeatherApp from './projects/WeatherApp/WeatherApp'
+import NotesApp from './projects/NotesApp/NotesApp'
 
 function App() {
-  // Hangi proje gösterilsin? 'todo' veya 'weather'
+  // Which project should be displayed? 'todo', 'weather', or 'notes'
   const [activeProject, setActiveProject] = useState('todo')
 
   return (
     <div className="app">
-      <h1>React Projeleri</h1>
+      <h1>React Projects</h1>
 
-      {/* Proje seçim menüsü */}
+      {/* Project selection menu */}
       <nav className="project-nav">
         <button
           className={activeProject === 'todo' ? 'active' : ''}
@@ -25,14 +26,21 @@ function App() {
           className={activeProject === 'weather' ? 'active' : ''}
           onClick={() => setActiveProject('weather')}
         >
-          Hava Durumu
+          Weather
+        </button>
+        <button
+          className={activeProject === 'notes' ? 'active' : ''}
+          onClick={() => setActiveProject('notes')}
+        >
+          Notes
         </button>
       </nav>
 
-      {/* Seçilen projeyi göster */}
-      {/* WinForms'ta: tabControl1.SelectedTab gibi düşün */}
+      {/* Render the selected project */}
+      {/* WinForms equivalent: tabControl1.SelectedTab */}
       {activeProject === 'todo' && <TodoApp />}
       {activeProject === 'weather' && <WeatherApp />}
+      {activeProject === 'notes' && <NotesApp />}
     </div>
   )
 }
