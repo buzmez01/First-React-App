@@ -29,7 +29,7 @@ body {
   margin-bottom: 20px;
 }
 
-.project-nav button {
+.project-nav a {
   padding: 10px 24px;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -38,14 +38,15 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   color: #555;
+  text-decoration: none;
 }
 
-.project-nav button:hover {
+.project-nav a:hover {
   border-color: #3498db;
   color: #3498db;
 }
 
-.project-nav button.active {
+.project-nav a.active {
   background: #3498db;
   border-color: #3498db;
   color: white;
