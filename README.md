@@ -4,7 +4,7 @@ I'm a .NET developer who primarily builds desktop applications with WinForms. I 
 
 Instead of following tutorials passively, I built 4 progressively complex mini-apps, each one introducing a new set of React concepts. Coming from a WinForms background, thinking in components and state felt unfamiliar at first, but mapping React patterns to WinForms equivalents (e.g., useState as a property with automatic UI refresh, useEffect as Form_Load) made everything click.
 
-This project helped me understand how React thinks — and if you're coming from a desktop development background like me, I hope it helps you too.
+This project helped me understand how React thinks and if you're coming from a desktop development background like me, I hope it helps you too.
 
 ## Projects
 
