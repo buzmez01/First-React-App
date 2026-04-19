@@ -8,8 +8,8 @@ A progressive React learning project built with Vite. Each mini-app introduces n
 |---|---------|-----------------|
 | 1 | **Todo App** | useState, JSX, event handling, list rendering with map(), immutability |
 | 2 | **Weather App** | useEffect, fetch API, async/await, conditional rendering |
-| 3 | **Notes App** | *Coming soon* |
-| 4 | **Movie List** | *Coming soon* |
+| 3 | **Notes App** | CRUD, localStorage, useEffect dependencies, props, component splitting |
+| 4 | **Movie App** | React Router, URL parameters, search & filter, derived state |
 
 ## Getting Started
 
