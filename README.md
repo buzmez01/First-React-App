@@ -4,12 +4,31 @@ A progressive React learning project built with Vite. Each mini-app introduces n
 
 ## Projects
 
-| # | Project | Concepts Covered |
-|---|---------|-----------------|
-| 1 | **Todo App** | useState, JSX, event handling, list rendering with map(), immutability |
-| 2 | **Weather App** | useEffect, fetch API, async/await, conditional rendering |
-| 3 | **Notes App** | CRUD, localStorage, useEffect dependencies, props, component splitting |
-| 4 | **Movie App** | React Router, URL parameters, search & filter, derived state |
+### 1. Todo App
+> **Concepts:** useState, JSX, event handling, list rendering with map(), immutability
+
+![Todo App](screenshots/todo.PNG)
+
+---
+
+### 2. Weather App
+> **Concepts:** useEffect, fetch API, async/await, conditional rendering
+
+![Weather App](screenshots/weather.PNG)
+
+---
+
+### 3. Notes App
+> **Concepts:** CRUD, localStorage, useEffect dependencies, props, component splitting
+
+![Notes App](screenshots/notes.PNG)
+
+---
+
+### 4. Movie App
+> **Concepts:** React Router, URL parameters, search & filter, derived state
+
+![Movie App](screenshots/movies.PNG)
 
 ## Getting Started
 
@@ -23,6 +42,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ## Tech Stack
 
 - React 19
+- React Router
 - Vite 8
-- JavaScript (no TypeScript — intentional for learning)
-- Plain CSS (no frameworks)
+- JavaScript
+- Plain CSS
